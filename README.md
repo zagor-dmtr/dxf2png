@@ -19,3 +19,15 @@ Example:
 ./convert.sh data/test.dxf test.png
 
 Additional parameters are supported to specify background color (png), dimension, the whitelist/blacklist of dxf layers. Check comment in convert.sh for detail.
+
+## Запуск в Windows
+
+1. Создать Volumes:
+docker volume create dxf
+
+2. Скопировать DXF-файлы в Volume для dxf:
+
+Для Docker Desktop в Windows:
+\\wsl.localhost\docker-desktop-data\data\docker\volumes\dxf\_data
+
+docker run --rm -v dxf:/data dxf2png bash -c "set -e; set -x;cp /data/1.dxf /tmp/src.dxf; xvfb-run -a /dxf2png/dxf2png /tmp/src.dxf /data/1.png white 800 600"

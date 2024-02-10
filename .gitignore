@@ -73,3 +73,5 @@ scripts/PWD
 *.user
 
 .qmake.stash
+
+.idea/

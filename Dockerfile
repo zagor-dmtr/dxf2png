@@ -1,7 +1,5 @@
 FROM ubuntu:16.04
 
-MAINTAINER dmitriy
-
 RUN apt-get update
 RUN apt-get -y install g++ gcc make git-core qtbase5-dev libqt5svg5-dev \
  qttools5-dev qtchooser qttools5-dev-tools libmuparser-dev librsvg2-bin \
