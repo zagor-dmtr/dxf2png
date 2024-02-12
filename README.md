@@ -8,7 +8,7 @@ dxf2png was originally forked from [LibreCAD](https://github.com/LibreCAD/LibreC
 
 docker build --rm -t dxf2png .
 
-## Run
+## Запуск в Linux
 
 ./convert.sh dxf_path dest_path
 
@@ -22,12 +22,18 @@ Additional parameters are supported to specify background color (png), dimension
 
 ## Запуск в Windows
 
+***Если при сборке образа возникают проблемы с .sh файлами - задать всем .sh-файлам формат конца строки Linux.
+В Notepad++: Правка - Формат конца строк - Преобразовать в Unix (LF)***
+
 1. Создать Volumes:
-docker volume create dxf
+`docker volume create dxf`
 
-2. Скопировать DXF-файлы в Volume для dxf:
+2. Скопировать DXF-файл `1.dxf` в Volume для dxf:
+   `\\wsl.localhost\docker-desktop-data\data\docker\volumes\dxf\_data`
 
-Для Docker Desktop в Windows:
-\\wsl.localhost\docker-desktop-data\data\docker\volumes\dxf\_data
+3. Запустить команду:
+`docker run --rm -v dxf:/data dxf2png bash -c "set -e; set -x;cp /data/1.dxf /tmp/src.dxf; xvfb-run -a /dxf2png/dxf2png /tmp/src.dxf /data/1.png white 800 600"`
 
-docker run --rm -v dxf:/data dxf2png bash -c "set -e; set -x;cp /data/1.dxf /tmp/src.dxf; xvfb-run -a /dxf2png/dxf2png /tmp/src.dxf /data/1.png white 800 600"
+4. Результат: файл `1.png` в папке рядом с исходным файлом.
+
+Назначение параметров описано в файле [convert.sh](convert.sh)
